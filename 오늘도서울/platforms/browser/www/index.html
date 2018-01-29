@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <title>My App</title>
+  <!-- Path to Framework7 Library CSS-->
+  <link rel="stylesheet" href="css/framework7.material.min.css">
+  <link rel="stylesheet" href="css/framework7.material.colors.min.css">
+  <!-- Path to your custom app styles-->
+  <link rel="stylesheet" href="css/my-app.css">
+  <style>
+    .container {
+      width: 90%;
+      margin: 40px auto;
+      background: rgb(255, 255, 255);
+    }
+
+    .outer {
+      display: table;
+      width: 100%;
+      height: 100%;
+    }
+
+    .inner {
+      display: table-cell;
+      vertical-align: middle;
+      text-align: center;
+    }
+
+    .centered {
+      position: relative;
+      display: inline-block;
+
+      width: 50%;
+      padding: 1em;
+      background: orange;
+      color: white;
+    }
+
+    .popup-itemAddPopup table td {
+      height: 50px;
+    }
+
+    .custom-icon-delete,
+    .custom-icon-add {
+      vertical-align: middle;
+      width: 20px;
+    }
+
+    .custom-item-img {
+      vertical-align: middle;
+      width: 20px;
+      margin-left: 15px;
+    }
+
+    .custom-item-title {
+      font-size: 14px;
+    }
+    .navbar-inner {
+      background-color: #2196f3;
+    }
+
+    .navbar-on-center div.sliding  {
+    }
+
+    .popup-news-1 img {width:100%;height:100%;}
+    .popup-news-2 img {width:100%;height:100%;}
+    .popup-news-3 img {width:100%;height:100%;}
+    .popup-news-4 img {width:100%;height:100%;}
+    .popup-news-5 img {width:100%;height:100%;}
+
+    table.show {
+      display:block;
+    }
+    table.hide {
+      display:none;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Status bar overlay for fullscreen mode-->
+  <div class="statusbar-overlay"></div>
+  <!-- Panels overlay-->
+  <div class="panel-overlay"></div>
+  <!-- Left panel with reveal effect-->
+  <div class="panel panel-left panel-reveal">
+    <div class="content-block">
+      <p>Left panel content goes here</p>
+    </div>
+  </div>
+  <!-- Right panel with cover effect-->
+  <div class="panel panel-right panel-cover">
+    <div class="content-block">
+      <p>Right panel content goes here</p>
+    </div>
+  </div>
+  <!-- Views-->
+  <div class="views">
+    <!-- Your main view, should have "view-main" class-->
+    <div class="view view-main">
+      <!-- Top Navbar-->
+      <div class="navbar">
+        <div class="navbar-inner">
+          <!-- We have home navbar without left link-->
+          <div class="center sliding">
+            <span>오늘도 서울</span>
+          </div>
+          <div class="right">
+            <!-- Right link contains only icon - additional "icon-only" class-->
+            <a href="#" class="open-popup icon-only" data-popup=".popup-itemAddPopup" style="width:30px; height:30px; margin-right:10px;">
+              <i class="icon icon-bars"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pages, because we need fixed-through navbar and toolbar, it has additional appropriate classes-->
+      <div class="pages navbar-through toolbar-through">
+        
+        <!-- Page, data-page contains page name-->
+        <div data-page="index" class="page">
+          <!-- Scrollable page content-->
+          <div class="page-content pull-to-refresh-content" data-ptr-distance="55">
+              <div class="pull-to-refresh-layer">
+                  <div class="preloader"></div>
+                  <div class="pull-to-refresh-arrow"></div>
+                </div>
+              <div class="list-block">
+              <div style="position:absolute; top:100px; right:50px;">
+                  상단 우측의 환경 설정에서<br />
+                  필요한 항목을 선택하세요.
+                </div>
+          <!--
+            <div class="card">
+              <div class="card-content">
+                <div class="card-content-inner">이것은기본 카드 형태입니다.</div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header">Card header</div>
+              <div class="card-content">
+                <div class="card-content-inner">탑과 바텀이 있는 카드.</div>
+              </div>
+              <div class="card-footer">Card Footer</div>
+            </div>
+            <div class="card">
+              <div class="card-content">
+                <div class="card-content-inner">이것도 기본 카드 입니다.. </div>
+              </div>
+            </div>
+          -->
+          </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Toolbar
+      <div class="toolbar">
+        <div class="toolbar-inner">
+          <a href="#" class="link">Link 1</a>
+          <a href="#" class="link">Link 2</a>
+        </div>
+      </div>
+      -->
+    </div>
+  </div>
+  <div class="popup popup-services" data-popup=".test-popup">
+    Any HTML content goes here
+  </div>
+  <!-- Path to Framework7 Library JS-->
+  <script type="text/javascript" src="js/framework7.js"></script>
+  <!-- Path to your app js-->
+  <script type="text/javascript" src="js/my-app.js"></script>
+
+  <div id="culture" style="display:none;">
+     <table style="margin-top:-10px; margin-bottom:-10px;">
+       <tr>
+         <td rowspan="3"><img src="" /></td>
+         <td class="itemTitle" style="font-size:15px; padding-left:10px;"></td>
+       </tr>
+       <tr>
+         <td class="place" style="font-size:14px; padding-left:10px;"></td>
+      </tr>
+      <tr>
+        <td class="date" style="font-size:14px; padding-left:10px;"></td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- 아이템 폼 -->
+  <div id="weather" style="display:none;">
+
+    <div>
+      <!--
+      <div style="font-size:12px; line-height:12px; display:inline-block; margin:10px;">
+        <span>관악구</span>
+      </div>
+      <div style="font-size:12px; line-height:12px; float:right; margin:10px;">
+        10.20 23:00 발표
+      </div>
+    -->
+      <div style="text-align: center;">
+        <table style="width:100%; margin:0 auto;">
+          <colgroup>
+            <col width="33.3%" />
+            <col width="33.3%" />
+            <col width="33.3%" />
+          </colgroup>
+          <tr>
+            <!--
+            <td class="weatherTd" style="border-bottom:solid 1px blue;">
+              <span style="color:blue;" name="day_0">현재</span>
+            </td>-->
+            <td class="weatherTd" style="border-bottom:solid 1px blue;">
+              <span  style="color:blue;" name="day_1">오늘</span>
+            </td>
+            <td class="weatherTd" >
+              <span name="day_2">내일</span>
+            </td>
+            <td class="weatherTd" >
+              <span name="day_3">모레</span>
+            </td>
+          </tr>
+
+        </table>
+      </div>
+    </div>
+
+
+    <div class="swiper-container" style="margin-top:10px;">
+      <div class="swiper-wrapper">
+        <!--
+        <div class="swiper-slide current">
+
+          <div style="text-align:center;">
+            <div style="display:inline-block;">
+              <img name="weatherIcon" style="height:80px" src="" />
+            </div>
+            <div style="display:inline-block; text-align:left;">
+              <span name="sky" style="display:block; line-height:30px; font-size:30px; margin-left:5px;">맑음1</span>
+              <span name="t1h" style="font-size:60px; line-height:60px;">162</span>
+              <span style="font-size:30px; vertical-align:top;">℃</span>
+            </div>
+            <div style="text-align: right; margin-right:20px;">
+              </span>
+              <span style="margin-left:20px; color:#a9a9a9;">습도
+                <span name="reh" style="color:#000;"></span>%</span>
+            </div>
+          </div>
+        </div>
+      -->
+        <div class="swiper-slide next today">
+          <table style="width:100%; text-align:center;">
+            <colgroup>
+              <col width="50%" />
+              <col width="50%" />
+            </colgroup>
+            <tr>
+              <td style="vertical-align: super;" class="morning">
+                <div>오전</div>
+                <div style="display:inline-block;">
+                  <img name="weatherIcon" style="height:50px; vertical-align:top;" src="" />
+                  <span style="line-height:50px; font-size:35px;" name="t3h">-</span>
+                  <span style="vertical-align:super; font-size:17px;">℃</span>
+
+                </div>
+                <div>
+                  <span name="sky" style="font-size:13px;"></span>
+                </div>
+                <div style="margin-top:15px;">
+                  <span style="font-size:12px;" name="pop"></span>
+                  <span style="font-size:12px;" name="reh"></span>
+                </div>
+              </td>
+              <td style="vertical-align: super;" class="afternoon">
+                <div>오후</div>
+                <div style="display:inline-block;">
+                  <img name="weatherIcon" style="height:50px; vertical-align:top;" src="" />
+                  <span style="line-height:50px; font-size:35px;" name="t3h">-</span>
+                  <span style="vertical-align:super; font-size:17px;">℃</span>
+                </div>
+                <div>
+                  <span name="sky" style="font-size:14px;"></span>
+                </div>
+                <div style="margin-top:15px;">
+                  <span style="font-size:12px;" name="pop"></span>
+                  <span style="font-size:12px;" name="reh"></span>
+                </div>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div class="swiper-slide next tomorrow">
+          <table style="width:100%; text-align:center;">
+            <colgroup>
+              <col width="50%" />
+              <col width="50%" />
+            </colgroup>
+            <tr>
+              <td style="vertical-align: super;" class="morning">
+                <div>오전</div>
+                <div style="display:inline-block;">
+                  <img name="weatherIcon" style="height:50px; vertical-align:top;" src="" />
+                  <span style="line-height:50px; font-size:35px;" name="t3h">-</span>
+                  <span style="vertical-align:super; font-size:17px;">℃</span>
+
+                </div>
+                <div>
+                  <span name="sky" style="font-size:13px;"></span>
+                </div>
+                <div style="margin-top:15px;">
+                  <span style="font-size:12px;" name="pop"></span>
+                  <span style="font-size:12px;" name="reh"></span>
+                </div>
+              </td>
+              <td style="vertical-align: super;" class="afternoon">
+                <div>오후</div>
+                <div style="display:inline-block;">
+                  <img name="weatherIcon" style="height:50px; vertical-align:top;" src="" />
+                  <span style="line-height:50px; font-size:35px;" name="t3h">-</span>
+                  <span style="vertical-align:super; font-size:17px;">℃</span>
+                </div>
+                <div>
+                  <span name="sky" style="font-size:14px;"></span>
+                </div>
+                <div style="margin-top:15px;">
+                  <span style="font-size:12px;" name="pop"></span>
+                  <span style="font-size:12px;" name="reh"></span>
+                </div>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div class="swiper-slide next afterTomorrow">
+          <table style="width:100%; text-align:center;">
+            <colgroup>
+              <col width="50%" />
+              <col width="50%" />
+            </colgroup>
+            <tr>
+              <td style="vertical-align: super;" class="morning">
+                <div>오전</div>
+                <div style="display:inline-block;">
+                  <img name="weatherIcon" style="height:50px; vertical-align:top;" src="" />
+                  <span style="line-height:50px; font-size:35px;" name="t3h">-</span>
+                  <span style="vertical-align:super; font-size:17px;">℃</span>
+
+                </div>
+                <div>
+                  <span name="sky" style="font-size:13px;"></span>
+                </div>
+                <div style="margin-top:15px;">
+                  <span style="font-size:12px;" name="pop"></span>
+                  <span style="font-size:12px;" name="reh"></span>
+                </div>
+              </td>
+              <td style="vertical-align: super;" class="afternoon">
+                <div>오후</div>
+                <div style="display:inline-block;">
+                  <img name="weatherIcon" style="height:50px; vertical-align:top;" src="" />
+                  <span style="line-height:50px; font-size:35px;" name="t3h">-</span>
+                  <span style="vertical-align:super; font-size:17px;">℃</span>
+                </div>
+                <div>
+                  <span name="sky" style="font-size:14px;"></span>
+                </div>
+                <div style="margin-top:15px;">
+                  <span style="font-size:12px;" name="pop"></span>
+                  <span style="font-size:12px;" name="reh"></span>
+                </div>
+              </td>
+            </tr>
+          </table>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- item Add Popup 
+   <div class="popup popup-itemAddPopup" style=" background-color:rgba(0, 0, 0, 0.5); text-align:center;">
+     <div class="container" style="border:2px solid skyblue;">
+        <div class="outer">
+            <div class="inner">
+              <div style="border-bottom:1px solid grey; text-align:left;">
+                  <span style="margin-left:5px;">추가 할 항목을 선택해주세요.</span>
+              </div>
+              <div>
+                <table class="itemAddPopupTable" style="width:100%;">
+                </table>
+              </div>
+            </div>
+        </div>
+      </div>
+  </div>
+  -->
+
+  <div class="popup popup-news-0">
+      <div class="pages">
+          <!-- Page, data-page contains page name-->
+          <div data-page="linkDetailView" class="page">
+            <!-- Scrollable page content-->
+            <div style="width:100%; text-align:right; margin:5px 0px 5px -15px; display:inline-block;"> <a href="#" class="close-popup">닫기</a></div>
+            <div class="page-content">
+              <div class="content-block" style="margin-top:0px;">
+                  <div class="card">
+                      <div class="card-header" style="display: inline-block;"><span class="t1" style="font-weight:bold;"></span><br /> 
+                        <span class="t2"></span></div>
+                      <div class="card-content"> 
+                        <div class="card-content-inner" style="word-break: break-all;">
+                            <img src="" style="width:100%; height:100%;"/>
+                            <div class="culture_content"></div>
+                            <br /><br /><br />
+                        </div>
+                      </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+  </div>
+  <!-- We don't need full layout here, because this page will be parsed with Ajax-->
+  <!-- Top Navbar-->
+  <div class="popup popup-news-1">
+      <div class="pages">
+          <div data-page="linkDetailView" class="page">
+            <div style="width:100%; text-align:right; margin:5px 0px 5px -15px; display:inline-block;"> <a href="#" class="close-popup">닫기</a></div>
+            <div class="page-content">
+              <div class="content-block" style="margin-top:0px;">
+                  <div class="card">
+                      <div class="card-header" style="display: inline-block;"><span class="t1" style="font-weight:bold;"></span><br /> 
+                        <span class="t2"></span></div>
+                      <div class="card-content"> 
+                        <div class="card-content-inner" style="word-break: break-all;">
+                            <img src="" style="width:100%; height:100%;"/>
+                            <br /><br /><br />
+                        </div>
+                      </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+  </div>
+  <div class="popup popup-news-2">
+      <div class="pages">
+          <div data-page="linkDetailView" class="page">
+            <div style="width:100%; text-align:right; margin:5px 0px 5px -15px; display:inline-block;"> <a href="#" class="close-popup">닫기</a></div>
+            <div class="page-content">
+              <div class="content-block" style="margin-top:0px;">
+                  <div class="card">
+                      <div class="card-header" style="display: inline-block;"><span style="font-weight:bold;"></span><br /> 
+                        <span></span></div>
+                      <div class="card-content"> 
+                        <div class="card-content-inner" style="word-break: break-all;">
+                            <img src="" style="width:100%; height:100%;"/>
+                            <br /><br /><br />
+                        </div>
+                      </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+  </div>
+  <div class="popup popup-news-3">
+      <div class="pages">
+          <div data-page="linkDetailView" class="page">
+            <div style="width:100%; text-align:right; margin:5px 0px 5px -15px; display:inline-block;"> <a href="#" class="close-popup">닫기</a></div>
+            <div class="page-content">
+              <div class="content-block" style="margin-top:0px;">
+                  <div class="card">
+                      <div class="card-header" style="display: inline-block;"><span style="font-weight:bold;"></span><br /> 
+                        <span></span></div>
+                      <div class="card-content"> 
+                        <div class="card-content-inner" style="word-break: break-all;">
+                            <img src="" style="width:100%; height:100%;"/>
+                            <br /><br /><br />
+                        </div>
+                      </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+  </div>
+  <div class="popup popup-news-4">
+      <div class="pages">
+          <div data-page="linkDetailView" class="page">
+            <div style="width:100%; text-align:right; margin:5px 0px 5px -15px; display:inline-block;"> <a href="#" class="close-popup">닫기</a></div>
+            <div class="page-content">
+              <div class="content-block" style="margin-top:0px;">
+                  <div class="card">
+                      <div class="card-header" style="display: inline-block;"><span style="font-weight:bold;"></span><br /> 
+                        <span></span></div>
+                      <div class="card-content"> 
+                        <div class="card-content-inner" style="word-break: break-all;">
+                            <img src="" style="width:100%; height:100%;"/>
+                            <br /><br /><br />
+                        </div>
+                      </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+  </div>
+  <div class="popup popup-news-5">
+      <div class="pages">
+          <div data-page="linkDetailView" class="page">
+            <div style="width:100%; text-align:right; margin:5px 0px 5px -15px; display:inline-block;"> <a href="#" class="close-popup">닫기</a></div>
+            <div class="page-content">
+              <div class="content-block" style="margin-top:0px;">
+                  <div class="card">
+                      <div class="card-header" style="display: inline-block;"><span style="font-weight:bold;"></span><br /> 
+                        <span></span></div>
+                      <div class="card-content"> 
+                        <div class="card-content-inner" style="word-break: break-all;">
+                            <img src="" style="width:100%; height:100%;"/>
+                            <br /><br /><br />
+                        </div>
+                      </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+  </div>
+
+  <div class="popup popup-busEditPopup">
+      <div style="background-color:rgba(0, 0, 0, 0.5); position:relative;">
+        <span style="float:left; padding: 10px 15px; color:#2196f3; font-weight:bold;">
+          <a href="#" class="close-popup">취소</a>
+        </span>
+      </div>
+  
+      <div class="pages">
+  
+        <!-- Page, data-page contains page name-->
+        <div data-page="itemList" class="page">
+          <!-- Scrollable page content-->
+          <div class="page-content" id="busContent_1">
+            <div class="content-block-title">버스 번호를 검색해주세요.</div>
+            <div style="margin: 16px 16px 16px;">
+                <div class="item-input">
+                    <p class="buttons-row">
+                        <input type="text" style="width:80%;" id="busNumInput">
+                        <a style="width:40px;" href="#" id="busNumSearchBtn" class="button button-raised">검색</a>
+                      </p>
+                  </div>  
+                  <div class="list-block">
+                      <p style="display:none;" id="busCotnentLoding_1"><span class="progressbar-infinite"></span></p>
+                    <div class="content-block-title">버스 번호를 선택해주세요.</div>
+                    <ul>
+                    </ul>
+                  </div>
+            </div>
+          </div>
+          <div class="page-content" id="busContent_2" style="display:none;">
+            <div class="content-block-title">정류장을 선택해주세요.</div>
+            <div style="margin: 16px 16px 16px;">
+                <p style="display:none;" id="busCotnentLoding_2"><span class="progressbar-infinite"></span></p>
+                    <div class="list-block">
+                      <ul>
+                      </ul>
+                    </div>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+
+  <div class="popup popup-itemAddPopup">
+    <div style="background-color:rgba(0, 0, 0, 0.5); position:relative;">
+      <span style="float:left; padding: 10px 15px; color:#2196f3; font-weight:bold;">
+        <a href="#" class="close-popup">취소</a>
+      </span>
+      <span  class="settingOk" style="float:right; padding: 10px 15px; color:#2196f3; font-weight:bold;">
+        <a href="#">완료</a>
+      </span>
+    </div>
+
+    <div class="pages">
+
+      <!-- Page, data-page contains page name-->
+      <div data-page="itemList" class="page">
+        <!-- Scrollable page content-->
+        <div class="page-content">
+          <div class="content-block-title">사용중인 항목
+          </div>
+          <div class="list-block sortable sortable-opened">
+            <ul class="usedItem">
+              <!--
+                    <li class="swipeout">
+                        <div class="swipeout-content item-content">
+                            <div class="item-inner">
+                                <div class="item-title">
+                                    <img class="custom-icon-delete" src="./img/list/delete.png" style="width:20px;" />
+                                    <img class="custom-item-img" src="./img/weather/sun.png" style="width:20px;" />
+                                    <span class="custom-item-title">버스</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swipeout-actions-right">
+                            <a href="#" class="swipeout-delete" data-confirm="항목을 삭제하시겠습니까?" data-confirm-title="Delete?" data-close-on-cancel="true">삭제</a>
+                        </div>
+                        <div class="sortable-handler"></div>
+                    </li>
+                    -->
+            </ul>
+          </div>
+
+          <div class="content-block-title">사용 할 수 있는 항목
+          </div>
+          <div class="list-block sortable sortable-opened">
+            <ul class="unusedItem">
+              <!--
+                        <li class="swipeout">
+                            <div class="swipeout-content item-content">
+                                <div class="item-inner">
+                                    <div class="item-title">
+                                        <img class="custom-icon-delete" src="./img/list/delete.png" style="width:20px;" />
+                                        <img class="custom-item-img" src="./img/weather/sun.png" style="width:20px;" />
+                                        <span class="custom-item-title">버스</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swipeout-actions-right">
+                                <a href="#" class="swipeout-delete" data-confirm="항목을 삭제하시겠습니까?" data-confirm-title="Delete?" data-close-on-cancel="true">삭제</a>
+                            </div>
+                            <div class="sortable-handler"></div>
+                        </li>
+                        -->
+            </ul>
+          </div>
+          <div class="content-block-title">준비 중
+            </div>
+            <div class="list-block sortable sortable-opened">
+                <ul class="">
+                    <li class="swipeout">
+                            <div class="swipeout-content item-content">
+                                <div class="item-inner">
+                                    <div class="item-title">
+                                        <span class="custom-item-title">지하철</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </li><li class="swipeout">
+                                <div class="swipeout-content item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title">
+                                            <span class="custom-item-title">장소 검색</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li><li class="swipeout">
+                                    <div class="swipeout-content item-content">
+                                        <div class="item-inner">
+                                            <div class="item-title">
+                                                <span class="custom-item-title">따릉이</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="swipeout">
+                                        <div class="swipeout-content item-content">
+                                            <div class="item-inner">
+                                                <div class="item-title">
+                                                    <span class="custom-item-title">서울 여행</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                </ul>
+            </div>
+            <!-- license -->
+            <div style="text-align:center;">
+              <p style="font-weight: bold; margin:0px;">Weather Icon</p>  
+              <p style="margin:0px;">designed by linector from Flaticon</p>
+            </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</body>
+
+</html>
